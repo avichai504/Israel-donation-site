@@ -4,7 +4,7 @@
   --blue: #4646e9;
   --light-blue: #3498db;
   --hover-blur: var(--hover-blue);
-  --black: #000;
+  --black: rgb(63, 63, 63)232;
 
   --blue-btn: #007BFF;
   --like-bg: #f2f2f2;
@@ -36,31 +36,63 @@ ul {
 nav {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 60px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid black;
-  /* text-transform: uppercase; */
+  padding: 5px 0;
+  border-bottom: 3px solid var(--blue);
+  background-color: rgb(221, 239, 255);
+  border-radius: 12px;
+}
+
+.site-title {
+  display: grid;
+  align-items: center;
+
+  /* border: solid 1px red; */
 }
 
 nav ul {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  align-items: end;
+  gap: 13px;
+
+  /* border: solid 1px black; */
 }
 
 nav li {
   list-style-type: none;
-  margin-left: 20px;
+  font-size: 18px;
+
+  /* border: solid 1px red; */
+}
+
+nav a {
+  color: var(--black);
+  font-weight: 800;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+
+  /* border: solid 2px green; */
+}
+
+nav a:hover {
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 5px;
 }
 
 nav h1 {
   font-size: 3em;
+  margin-right: 15px;
 }
 
-nav p,
-nav a {
-  color: var(--black);
-  font-weight: 400;
+.header,
+.header-logo {
+  color: var(--blue);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header:hover {
+  color: #fff;
 }
 
 footer {
@@ -69,10 +101,6 @@ footer {
   margin: 80px auto 20px;
 }
 
-.header {
-  color: var(--blue);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 
 h2 {
   margin-bottom: 80px;
@@ -92,8 +120,9 @@ h2 {
 }
 
 .content {
-  display: block;
-  margin-left: 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 20px;
 }
 
 .snippet {
@@ -166,56 +195,76 @@ h2 {
   color: var(--blue);
 }
 
+
 /* likes */
 .likes {
-  color: var(--blue-btn);
+  color: var(--blue);
   font-size: 22px;
-}
-
-
-.blog-comment {
-  display: flex;
-  justify-content: center;
-  
 }
 
 .like {
   margin-left: 12px;
-  background:none;
-  border: solid 1px var(--blue-btn);
+  background-color: var(--blue);
+  color: #FFF;
   border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .like:hover {
-  background-color: var(--light-blue);
+  transform: scale(1.1, 1.1);
+}
+
+.blog-comment {
+  display: flex;
+  justify-content: end;
+  margin: 12px;
 }
 
 /* about */
-.about p{
+.about p {
   font-size: 22px;
 }
 
 /* details styles */
-.details {
-  position: relative;
+.details h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
+.details p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #555;
+}
+
+.details {
+  margin-top: 45px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+
+
+/* delete button in the details page */
 .delete {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 8px;
-  border: solid 2px crimson;
-  border-radius: 12px;
+  position: relative;
+  background-color: crimson;
+  color: #FFF;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+
+  cursor: pointer;
 }
 
 .delete:hover {
-  cursor: pointer;
-  border-radius: 50%;
+  background-color: #b31212;
 }
-
 
 /* create new blog*/
 .create-blog form {
@@ -254,7 +303,7 @@ textarea {
   cursor: pointer;
 }
 
-.contact-btn:hover button{
+.contact-btn:hover button {
   background-color: #000;
 }
 
@@ -302,5 +351,3 @@ textarea {
 .contact-btn:hover {
   background-color: var(--blue-btn);
 }
-
-

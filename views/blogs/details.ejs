@@ -6,17 +6,15 @@
 
     <div class="details content">
       <h3>Title: <%=blog.title%></h3>
-      <div class="content">
-        <p class="snippet">Snippet: <%=blog.snippet%></p>
-        <p class="body">Body: <%=blog.body%></p>
-        <% if(blog.likes || blog.likes === 0) { %>
+      <p class="snippet">Snippet: <%=blog.snippet%></p>
+      <p class="body">Body: <%=blog.body%></p>
+      <% if(blog.likes || blog.likes === 0) { %>
         <p class="likes">Likes: <%=blog.likes %></p>
         <% } %>
         <button class="like">Like</button>
+        
       </div>
-
       <a class="delete" data-doc="<%= blog._id %>">delete</a>
-    </div>
 
     <%- include("../partials/footer") %>
   </body>

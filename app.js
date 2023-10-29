@@ -4,13 +4,11 @@ const mongoose = require("mongoose");
 const blogRoutes = require("./routes/blogRoutes");
 
 // Environment constants
-const {
-  PORT = 3000,
-  CLUSTER_NAME = "cluster0",
-  DATABASE_NAME = "dataBase1",
-  DB_USERNAME = "avichai-first-user",
-  DB_PASSWORD = "test1234",
-} = process.env;
+const PORT = process.env.PORT || 3000;
+const CLUSTER_NAME = process.env.CLUSTER_NAME || "cluster0";
+const DATABASE_NAME = process.env.DATABASE_NAME || "dataBase1";
+const DB_USERNAME = process.env.DB_USERNAME || "avichai-first-user";
+const DB_PASSWORD = process.env.DB_PASSWORD || "test1234";
 
 // Initialize the MongoDB connection
 const initializeDatabase = async (dbURI) => {
@@ -19,9 +17,7 @@ const initializeDatabase = async (dbURI) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("------Connected to the DB------");
   } catch (error) {
-    console.error("Failed to connect to MongoDB", error);
     process.exit(1);
   }
 };
@@ -38,7 +34,9 @@ const initializeApp = () => {
   // Routes
   app.get("/", (req, res) => res.redirect("/blogs"));
   app.get("/about", (req, res) => res.render("about", { title: "About" }));
-  app.get("/contactUs", (req, res) => res.render("contactUs", { title: "Contact Us" }));
+  app.get("/contactUs", (req, res) =>
+    res.render("contactUs", { title: "Contact Us" })
+  );
   app.use("/blogs", blogRoutes);
   app.use((req, res) => res.status(404).render("404", { title: "404" }));
 

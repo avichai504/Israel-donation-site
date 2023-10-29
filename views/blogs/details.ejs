@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head") %>
+  <body>
+    <%- include("../partials/nav") %>
+
+    <div class="details content">
+      <h3>Title: <%=blog.title%></h3>
+      <div class="content">
+        <p class="snippet">Snippet: <%=blog.snippet%></p>
+        <p class="body">Body: <%=blog.body%></p>
+        <% if(blog.likes || blog.likes === 0) { %>
+        <p class="likes">Likes: <%=blog.likes %></p>
+        <% } %>
+        <button class="like">Like</button>
+      </div>
+
+      <a class="delete" data-doc="<%= blog._id %>">delete</a>
+    </div>
+
+    <%- include("../partials/footer") %>
+  </body>
+
+  <!-- This script runs on the browser! NOT on the server... -->
+
+  <script>
+
+    // like
+    document.addEventListener("DOMContentLoaded", async () => {
+      const likeBtn = document.querySelector(".like");
+      const id = "<%= blog._id %>";
+      likeBtn.addEventListener("click", async () => {
+        try {
+          const response = await fetch(`/blogs/like/${id}`, {
+            method: "POST",
+          });
+          const data = await response.json();
+          document.querySelector(".likes").textContent = `Likes: ${data.likes}`;
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    });
+    const deleteBtn = document.querySelector("a.delete");
+    deleteBtn.addEventListener("click", async (event) => {
+      const userConfirmed = window.confirm("Are U sure?");
+      if (!userConfirmed) {
+        return;
+      }
+
+      // DELETE
+      const endpoint = `/blogs/${deleteBtn.dataset.doc}`;
+      try {
+        const response = await fetch(endpoint, {
+          method: "DELETE",
+        });
+        const data = await response.json();
+        window.location.href = data.redirect;
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  </script>
+</html>
+
+<!-- This is an endpoint: /blogs/653a736fc2358514829b9448 -->

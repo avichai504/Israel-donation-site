@@ -1,0 +1,51 @@
+<!-- Here we import "title" for the head and "blogs" for the content -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <div class="blogs content">
+      <h2>Donations</h2>
+
+      <% if(blogs.length > 0) { %> <% blogs.forEach(blog => { %>
+      <div class="blog" data-id="<%=blog._id%>">
+        <a class="single" href="/blogs/<%=blog._id%>">
+          <h3 class="title"><%= blog.title %></h3>
+          <p class="snippet"><%= blog.snippet %></p>
+          <p class="body"><%= blog.body %></p>
+        </a>
+        <div class="blog-comment">
+          <p class="likes"><%= blog.likes %></p>
+          <button class="like">Like</button>
+        </div>
+      </div>
+
+      <% }); %> <% }else{ %>
+      <h4>No blogs yet...</h4>
+      <% } %>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>
+  </body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".like").forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          try {
+            const id = e.target.closest(".blog").dataset.id;
+            const response = await fetch(`/blogs/like/${id}`, {
+              method: "POST",
+            });
+            const data = await response.json();
+            e.target.previousElementSibling.textContent = data.likes;
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      });
+    });
+  </script>
+</html>

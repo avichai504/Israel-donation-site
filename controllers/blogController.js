@@ -1,3 +1,5 @@
+// controllers/blogController.js
+
 const Blog = require("../models/blogs");
 
 // GET all blogs to the index page

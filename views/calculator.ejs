@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="calculator content">
+      <h2>Calculator</h2>
+      <form id="calculator-form">
+        <input type="number" name="num1" required value="1" />
+        <input type="number" name="num2" required value="2" />
+        <button type="submit">Calculate Sum</button>
+      </form>
+      <p id="result"></p>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+
+    <script>
+      document.getElementById('calculator-form').onsubmit = async function (
+        event
+      ) {
+        event.preventDefault()
+        let num1 = document.querySelector('input[name="num1"]').value
+        let num2 = document.querySelector('input[name="num2"]').value
+
+        let response = await fetch(`/calculator/calculate?num1=${num1}&num2=${num2}`);
+
+
+        let data = await response.text()
+        document.getElementById('result').innerText = `Sum: ${data}`
+      }
+    </script>
+  </body>
+</html>
